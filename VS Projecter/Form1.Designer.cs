@@ -29,14 +29,16 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            textBox1 = new TextBox();
-            checkBox1 = new CheckBox();
+            TEXT_ProjectName = new TextBox();
+            CHK_MakeGit = new CheckBox();
             folderBrowserDialog1 = new FolderBrowserDialog();
             label2 = new Label();
             label3 = new Label();
             BTN_SelectFolder = new Button();
             label4 = new Label();
             BTN_MakeProjBtn = new Button();
+            progressBar1 = new ProgressBar();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             SuspendLayout();
             // 
             // label1
@@ -49,24 +51,25 @@
             label1.TabIndex = 0;
             label1.Text = "Project Name";
             // 
-            // textBox1
+            // TEXT_ProjectName
             // 
-            textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(147, 5);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(443, 29);
-            textBox1.TabIndex = 1;
+            TEXT_ProjectName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            TEXT_ProjectName.Location = new Point(147, 5);
+            TEXT_ProjectName.Name = "TEXT_ProjectName";
+            TEXT_ProjectName.Size = new Size(443, 29);
+            TEXT_ProjectName.TabIndex = 1;
+            TEXT_ProjectName.TextChanged += TEXT_ProjectName_TextChanged;
             // 
-            // checkBox1
+            // CHK_MakeGit
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            checkBox1.Location = new Point(12, 101);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(164, 25);
-            checkBox1.TabIndex = 3;
-            checkBox1.Text = "Initialize Git Repo?";
-            checkBox1.UseVisualStyleBackColor = true;
+            CHK_MakeGit.AutoSize = true;
+            CHK_MakeGit.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            CHK_MakeGit.Location = new Point(12, 101);
+            CHK_MakeGit.Name = "CHK_MakeGit";
+            CHK_MakeGit.Size = new Size(164, 25);
+            CHK_MakeGit.TabIndex = 3;
+            CHK_MakeGit.Text = "Initialize Git Repo?";
+            CHK_MakeGit.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -100,11 +103,10 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(152, 73);
+            label4.Location = new Point(246, 53);
             label4.Name = "label4";
-            label4.Size = new Size(134, 15);
+            label4.Size = new Size(0, 15);
             label4.TabIndex = 7;
-            label4.Text = "(Your VS Projects folder)";
             // 
             // BTN_MakeProjBtn
             // 
@@ -116,18 +118,33 @@
             BTN_MakeProjBtn.UseVisualStyleBackColor = true;
             BTN_MakeProjBtn.Click += BTN_MakeProjBtn_Click;
             // 
+            // progressBar1
+            // 
+            progressBar1.ForeColor = Color.RosyBrown;
+            progressBar1.Location = new Point(7, 160);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new Size(583, 23);
+            progressBar1.TabIndex = 9;
+            // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            // 
             // MainWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1066, 529);
+            ClientSize = new Size(598, 191);
+            Controls.Add(progressBar1);
             Controls.Add(BTN_MakeProjBtn);
             Controls.Add(label4);
             Controls.Add(BTN_SelectFolder);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(checkBox1);
-            Controls.Add(textBox1);
+            Controls.Add(CHK_MakeGit);
+            Controls.Add(TEXT_ProjectName);
             Controls.Add(label1);
             Name = "MainWindow";
             Text = "VS Projecter";
@@ -138,13 +155,15 @@
         #endregion
 
         private Label label1;
-        private TextBox textBox1;
-        private CheckBox checkBox1;
+        private TextBox TEXT_ProjectName;
+        private CheckBox CHK_MakeGit;
         private FolderBrowserDialog folderBrowserDialog1;
         private Label label2;
         private Label label3;
         private Button BTN_SelectFolder;
         private Label label4;
         private Button BTN_MakeProjBtn;
+        private ProgressBar progressBar1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
